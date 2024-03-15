@@ -1,4 +1,5 @@
 import router from '@ohos.router'
+import promptAction from '@ohos.promptAction'
 import { Header } from '../components/ComComponents'
 
 @Entry

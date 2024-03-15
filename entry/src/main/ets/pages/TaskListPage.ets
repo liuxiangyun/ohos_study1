@@ -163,8 +163,8 @@ class TaskInfo {
 
 @Observed
 class Task {
-  private static id: number = 1
-  name: string = `任务${Task.id++}`
+  private static id: number = 0
+  name: string = `任务${++Task.id}`
   state: TaskState = TaskState.RUNNING
 }
 

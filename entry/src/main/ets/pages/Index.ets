@@ -1,4 +1,5 @@
 import router from '@ohos.router'
+import promptAction from '@ohos.promptAction'
 import { Header } from '../components/ComComponents'
 
 @Entry
@@ -9,21 +10,43 @@ struct Index {
     new ExamplePage('图片查看', 1, 'pages/ImagePage'),
     new ExamplePage('商品列表', 2, 'pages/ProductPage'),
     new ExamplePage('任务列表', 3, 'pages/TaskListPage')]
-  @State tip: string = ''
 
   onPageShow() {
-    let backParams: any = router.getParams()
-    this.tip = backParams?.tip
-    console.log(`${this.tip}`)
+    this.showBackTip()
+
+  }
+
+  showBackTip() {
+    const backParams: any = router.getParams()
+    const tip = backParams?.tip
+    if (tip) {
+      promptAction.showToast({ message: tip })
+
+      // promptAction.showDialog({
+      //   title: '返回首页',
+      //   message: tip,
+      //   buttons: [
+      //     {
+      //       text: '是',
+      //       color: '#89BCDD'
+      //     },
+      //     {
+      //       text: '不确定',
+      //       color: '#811CDD'
+      //     },
+      //     {
+      //       text: '否',
+      //       color: '#AABCDD'
+      //     }
+      //   ]
+      // }).then().catch()
+    }
   }
 
   build() {
     Column() {
       Header({ title: `案例列表`, leftImg: null })
 
-      if (this.tip) {
-        Text(this.tip)
-      }
 
       List({ space: 20 }) {
         ForEach(this.examples, (example) => {
