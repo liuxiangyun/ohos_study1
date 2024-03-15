@@ -3,6 +3,7 @@
     "pages/Index",
     "pages/ImagePage",
     "pages/ProductPage",
-    "pages/TaskListPage"
+    "pages/TaskListPage",
+    "pages/ProductDetailPage"
   ]
 }

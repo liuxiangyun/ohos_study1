@@ -8,11 +8,22 @@ struct Index {
   @State examples: Array<ExamplePage> = [
     new ExamplePage('图片查看', 1, 'pages/ImagePage'),
     new ExamplePage('商品列表', 2, 'pages/ProductPage'),
-    new ExamplePage('任务列表', 3, 'TaskListPage')]
+    new ExamplePage('任务列表', 3, 'pages/TaskListPage')]
+  @State tip: string = ''
+
+  onPageShow() {
+    let backParams: any = router.getParams()
+    this.tip = backParams?.tip
+    console.log(`${this.tip}`)
+  }
 
   build() {
     Column() {
-      Header({ title: '案例列表' })
+      Header({ title: `案例列表`, leftImg: null })
+
+      if (this.tip) {
+        Text(this.tip)
+      }
 
       List({ space: 20 }) {
         ForEach(this.examples, (example) => {
@@ -35,7 +46,7 @@ struct Index {
             .onClick(() => {
               router.pushUrl({
                 url: example.route,
-                params: { pageName: example.name }
+                params: { pageName: `${example.id}.${example.name}` }
               }, router.RouterMode.Standard, (err) => {
                 console.log(`route error ,${err.name} errorCode:${err.code} errorMessage:${err.message}}`)
               })
@@ -49,9 +60,9 @@ struct Index {
 }
 
 class ExamplePage {
-  private name: string
-  private id: number
-  private route: string
+  name: string
+  id: number
+  route: string
 
   constructor(name: string, id: number, route: string) {
     this.name = name

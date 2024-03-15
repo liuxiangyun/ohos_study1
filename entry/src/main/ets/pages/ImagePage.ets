@@ -67,7 +67,6 @@ struct ImagePage {
   defImageSize: number = 50
   @State message: string = 'Hello World'
   @State imageSize: number = this.defImageSize
-  params: any = router.getParams()
 
   max() {
     let size = this.imageSize + 5
@@ -95,7 +94,7 @@ struct ImagePage {
   build() {
 
     Column() {
-      Header({ title: this.params?.pageName })
+      Header()
 
       Row() {
         Image('https://t12.baidu.com/it/u=1869928635,214858621&fm=30&app=106&f=JPEG?w=640&h=640&s=1FA8782362E366BB881CD1430300F0E1')

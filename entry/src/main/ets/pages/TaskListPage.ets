@@ -1,3 +1,5 @@
+import { Header } from '../components/ComComponents'
+
 @Entry
 @Component
 struct TaskListPage {
@@ -5,6 +7,8 @@ struct TaskListPage {
 
   build() {
     Column({ space: 20 }) {
+      Header()
+
       //任务进度
       TaskProcess()
 

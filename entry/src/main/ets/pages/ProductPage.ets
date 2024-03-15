@@ -1,4 +1,5 @@
 import resourceManager from '@ohos.resourceManager'
+import router from '@ohos.router'
 import { Header } from '../components/ComComponents'
 
 
@@ -15,24 +16,19 @@ struct ProductPage {
 
   build() {
     Column() {
-      Header({
-        title: "商品列表",
-        leftImg: $r('app.media.ic_back'),
-        rightImg: $r('app.media.ic_refresh'),
-        leftEvent: () => {
-          console.log("点击了 titleBar 左边的按钮")
-        },
-        rightEvent: () => {
-          console.log("点击了 titleBar 右边的按钮")
-        }
-      })
+      Header({ rightImg: $r('app.media.ic_refresh'), })
 
       Row() {
         List({ space: 10, scroller: this.scroller }) {
           ForEach(this.data, (item: Product) => {
             ListItem() {
               this.ItemProduct(item)
-            }
+            }.onClick(() => {
+              router.pushUrl({ url: 'pages/ProductDetailPage', params: {
+                productName: item.name,
+                productPic: item.pic
+              } })
+            })
           })
         }
         .margin({ top: 15 })

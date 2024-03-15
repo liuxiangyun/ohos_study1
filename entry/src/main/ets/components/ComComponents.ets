@@ -2,30 +2,48 @@ import router from '@ohos.router'
 
 @Component
 export struct Header {
-  private title: ResourceStr = $r('app.string.EntryAbility_label')
+  private title: ResourceStr
   private leftImg: ResourceStr = $r('app.media.ic_back')
   private rightImg: Resource
-  private leftEvent: (event?: ClickEvent) => void
+  private leftEvent: (event?: ClickEvent) => void = () => router.back()
   private rightEvent: (event?: ClickEvent) => void
+  @State params: any = router.getParams()
+
+  getTitle(): ResourceStr {
+    if (this.title) {
+      return this.title
+    } else if (this.params.pageName) {
+      return this.params.pageName
+    } else {
+      return $r('app.string.EntryAbility_label')
+    }
+  }
 
   build() {
     Row() {
       if (this.leftImg) {
         Image(this.leftImg).width(40).height(40).padding(3)
-          .onClick(() => this.leftEvent())
+          .onClick(() => {
+            if (this.leftEvent) {
+              this.leftEvent()
+            }
+          })
       }
-      if (this.title) {
-        Text(this.title)
+      if (this.getTitle()) {
+        Text(this.getTitle())
           .fontSize(30)
           .fontWeight(FontWeight.Bold)
           .maxLines(1)
           .textOverflow({ overflow: TextOverflow.Ellipsis })
-          .textAlign(TextAlign.Center)
           .layoutWeight(1)
       }
       if (this.rightImg) {
         Image(this.rightImg).width(40).height(40).padding(3)
-          .onClick(() => this.rightEvent())
+          .onClick(() => {
+            if (this.rightEvent) {
+              this.rightEvent()
+            }
+          })
       }
     }
     .width('100%')
