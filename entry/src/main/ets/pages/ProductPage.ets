@@ -11,28 +11,60 @@ struct ProductPage {
     new Product('huawei mate50 pro', 'https://t12.baidu.com/it/u=1869928635,214858621&fm=30&app=106&f=JPEG?w=640&h=640&s=1FA8782362E366BB881CD1430300F0E1', 5000),
     new Product('huawei mate60 pro', 'https://t12.baidu.com/it/u=1869928635,214858621&fm=30&app=106&f=JPEG?w=640&h=640&s=1FA8782362E366BB881CD1430300F0E1', 6000, 5599),
     new Product('huawei mate70 pro', 'https://t12.baidu.com/it/u=1869928635,214858621&fm=30&app=106&f=JPEG?w=640&h=640&s=1FA8782362E366BB881CD1430300F0E1', 7000),
+    new Product('huawei mate80 pro', 'https://t12.baidu.com/it/u=1869928635,214858621&fm=30&app=106&f=JPEG?w=640&h=640&s=1FA8782362E366BB881CD1430300F0E1', 8000),
+    new Product('huawei mate40 pro', 'https://t12.baidu.com/it/u=1869928635,214858621&fm=30&app=106&f=JPEG?w=640&h=640&s=1FA8782362E366BB881CD1430300F0E1', 3000, 2599),
+    new Product('huawei mate40 pro', 'https://t12.baidu.com/it/u=1869928635,214858621&fm=30&app=106&f=JPEG?w=640&h=640&s=1FA8782362E366BB881CD1430300F0E1', 4000),
+    new Product('huawei mate50 pro', 'https://t12.baidu.com/it/u=1869928635,214858621&fm=30&app=106&f=JPEG?w=640&h=640&s=1FA8782362E366BB881CD1430300F0E1', 5000),
+    new Product('huawei mate60 pro', 'https://t12.baidu.com/it/u=1869928635,214858621&fm=30&app=106&f=JPEG?w=640&h=640&s=1FA8782362E366BB881CD1430300F0E1', 6000, 5599),
+    new Product('huawei mate70 pro', 'https://t12.baidu.com/it/u=1869928635,214858621&fm=30&app=106&f=JPEG?w=640&h=640&s=1FA8782362E366BB881CD1430300F0E1', 7000),
     new Product('huawei mate80 pro', 'https://t12.baidu.com/it/u=1869928635,214858621&fm=30&app=106&f=JPEG?w=640&h=640&s=1FA8782362E366BB881CD1430300F0E1', 8000)]
+  @State viewGrid: boolean = false
   private scroller: Scroller = new Scroller()
+
+  switchView() {
+    this.viewGrid = !this.viewGrid
+  }
 
   build() {
     Column() {
-      Header({ rightImg: $r('app.media.ic_refresh'), })
+      if (this.viewGrid) {
+        Header({ rightImg: $r('app.media.ic_list'), rightEvent: () => this.switchView() })
+      } else {
+        Header({ rightImg: $r('app.media.ic_grid'), rightEvent: () => this.switchView() })
+      }
 
       Row() {
-        List({ space: 10, scroller: this.scroller }) {
-          ForEach(this.data, (item: Product) => {
-            ListItem() {
-              this.ItemProduct(item)
-            }.onClick(() => {
-              router.pushUrl({ url: 'pages/ProductDetailPage', params: {
-                productName: item.name,
-                productPic: item.pic
-              } })
+        if (this.viewGrid) {
+          Grid(this.scroller) {
+            ForEach(this.data, (item: Product) => {
+              GridItem() {
+                this.ItemGridProduct(item)
+              }.onClick(() => {
+                router.pushUrl({ url: 'pages/ProductDetailPage', params: {
+                  productName: item.name,
+                  productPic: item.pic
+                } })
+              })
             })
-          })
+          }.columnsTemplate('1fr 1fr')
+          .columnsGap(10)
+          .rowsGap(20)
+        } else {
+          List({ space: 10, scroller: this.scroller }) {
+            ForEach(this.data, (item: Product) => {
+              ListItem() {
+                this.ItemListProduct(item)
+              }.onClick(() => {
+                router.pushUrl({ url: 'pages/ProductDetailPage', params: {
+                  productName: item.name,
+                  productPic: item.pic
+                } })
+              })
+            })
+          }
+          .margin({ top: 15 })
+          .layoutWeight(1)
         }
-        .margin({ top: 15 })
-        .layoutWeight(1)
 
         ScrollBar({ scroller: this.scroller }) {
           Text()
@@ -50,7 +82,7 @@ struct ProductPage {
   }
 
   @Builder
-  ItemProduct(product: Product) {
+  ItemListProduct(product: Product) {
     Row() {
       Image(product.pic).width(130).height(130).borderRadius(10)
       Column() {
@@ -68,6 +100,28 @@ struct ProductPage {
       .margin(8)
     }.width('100%').backgroundColor(Color.White)
     .borderRadius(10)
+  }
+
+  @Builder
+  ItemGridProduct(product: Product) {
+    Column() {
+      Image(product.pic).width(130).height(130).borderRadius(10)
+      Column() {
+        Text(product.name).fontWeight(FontWeight.Bold).fontSize(20).maxLines(2)
+        if (product.discount) {
+          Text('￥' + product.price).margin({ top: 30 }).fontSize(20).fontColor(Color.Grey).decoration({
+            type: TextDecorationType.LineThrough,
+            color: Color.Grey
+          })
+          Text('折扣价：￥' + product.discount).margin({ top: 10 }).priceText()
+        } else {
+          Text('￥' + product.price).margin({ top: 30 }).priceText()
+        }
+      }.alignItems(HorizontalAlign.Start).height(130)
+      .margin({ top: 8 })
+    }.width('100%').backgroundColor(Color.White)
+    .borderRadius(10)
+    .padding(8)
   }
 }
 
