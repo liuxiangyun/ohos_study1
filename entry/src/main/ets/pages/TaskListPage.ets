@@ -1,4 +1,5 @@
 import { Header } from '../components/ComComponents'
+import { TaskDataSource } from '../datasource/TaskDataSource'
 
 @Entry
 @Component
@@ -10,10 +11,13 @@ struct TaskListPage {
       Header()
 
       //任务进度
-      TaskProcess()
+      TaskProcess({ taskInfo: $taskInfo })
 
       //任务列表
-      TaskList()
+      // TaskList()
+
+      //懒加载 任务列表
+      LazyTaskList()
 
     }.fillScreen()
   }
@@ -22,7 +26,7 @@ struct TaskListPage {
 
 @Component
 struct TaskProcess {
-  @Consume taskInfo: TaskInfo
+  @Link taskInfo: TaskInfo
 
   build() {
     Row() {
@@ -56,6 +60,65 @@ struct TaskProcess {
   }
 }
 
+
+@Component
+struct LazyTaskList {
+  @Consume taskInfo: TaskInfo
+  private taskDataSource: TaskDataSource = new TaskDataSource()
+
+  aboutToAppear() {
+    this.refreshTaskProcess()
+  }
+
+  build() {
+    Column({ space: 20 }) {
+      //添加任务
+      Button('新增任务')
+        .width('50%')
+        .onClick(() => {
+          this.taskDataSource.pushData(new Task())
+          this.refreshTaskProcess()
+        })
+
+      List({ space: 10, scroller: new Scroller() }) {
+        LazyForEach(this.taskDataSource, (task: Task) => {
+          ListItem() {
+            TaskItem({ task: task, changeTask: () => {
+              this.refreshTaskProcess()
+            } })
+          }.swipeAction({
+            end: this.deleteBtn(task)
+          })
+        })
+      }.width('100%')
+      .layoutWeight(1)
+    }
+
+  }
+
+  refreshTaskProcess() {
+    this.taskInfo.finishTaskNum = this.taskDataSource.finishCount()
+    this.taskInfo.totalTaskNum = this.taskDataSource.totalCount()
+  }
+
+  @Builder deleteBtn(task: Task) {
+    Button() {
+      Image($r('app.media.ic_delete'))
+        .fillColor(Color.White)
+        .width(20)
+    }
+    .width(40)
+    .height(40)
+    .type(ButtonType.Circle)
+    .backgroundColor(Color.Red)
+    .margin(10)
+    .onClick(() => {
+      this.taskDataSource.deleteData(task)
+      this.refreshTaskProcess()
+    })
+  }
+}
+
 @Component
 struct TaskList {
   @Consume taskInfo: TaskInfo
@@ -71,12 +134,14 @@ struct TaskList {
           this.refreshTaskProcess()
         })
 
-      List({ space: 10 }) {
+      List({ space: 10, scroller: new Scroller() }) {
         ForEach(this.tasks, (task: Task, index: number) => {
           ListItem() {
             // TaskItem({ task: task, refreshTaskProcess: this.refreshTaskProcess.bind(this) })
 
-            TaskItem({ task: task, refreshTaskProcess: () => this.refreshTaskProcess() })
+            TaskItem({ task: task, changeTask: () => {
+              this.refreshTaskProcess()
+            } })
           }.swipeAction({
             end: this.deleteBtn(index)
           })
@@ -113,7 +178,7 @@ struct TaskList {
 @Component
 struct TaskItem {
   @ObjectLink task: Task
-  refreshTaskProcess: () => void
+  changeTask: () => void
 
   build() {
     Row() {
@@ -134,7 +199,7 @@ struct TaskItem {
         } else {
           this.task.state = TaskState.RUNNING
         }
-        this.refreshTaskProcess()
+        this.changeTask()
       })
         .select(this.task.state == TaskState.FINISH)
     }
@@ -162,12 +227,12 @@ class TaskInfo {
 }
 
 @Observed
-class Task {
+export class Task {
   private static id: number = 0
   name: string = `任务${++Task.id}`
   state: TaskState = TaskState.RUNNING
 }
 
-enum TaskState {
+export enum TaskState {
   RUNNING, FINISH
 }

@@ -12,7 +12,7 @@ export struct Header {
   getTitle(): ResourceStr {
     if (this.title) {
       return this.title
-    } else if (this.params.pageName) {
+    } else if (this.params?.pageName) {
       return this.params.pageName
     } else {
       return $r('app.string.EntryAbility_label')

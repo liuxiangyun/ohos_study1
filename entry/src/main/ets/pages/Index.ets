@@ -45,7 +45,7 @@ struct Index {
 
   build() {
     Column() {
-      Header({ title: `案例列表`, leftImg: null })
+      Header({ title: `案例列表`, leftImg: undefined })
 
 
       List({ space: 20 }) {
