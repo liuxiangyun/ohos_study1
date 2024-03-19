@@ -45,7 +45,7 @@ struct Index {
 
   build() {
     Column() {
-      Header({ title: `案例列表`, leftImg: undefined })
+      Header({ title: `案例列表`, leftImg: null })
 
 
       List({ space: 20 }) {
@@ -61,7 +61,7 @@ struct Index {
                 .fontColor(Color.White)
                 .fontSize(20)
             }
-            .backgroundColor(Color.Blue)
+            .backgroundColor('#11BBCC')
             .borderRadius(20)
             .justifyContent(FlexAlign.SpaceBetween)
             .padding(20)
