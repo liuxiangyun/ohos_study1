@@ -9,7 +9,8 @@ struct Index {
   @State examples: Array<ExamplePage> = [
     new ExamplePage('图片查看', 1, 'pages/ImagePage'),
     new ExamplePage('商品列表', 2, 'pages/ProductPage'),
-    new ExamplePage('任务列表', 3, 'pages/TaskListPage')]
+    new ExamplePage('任务列表', 3, 'pages/TaskListPage'),
+    new ExamplePage('动画介绍', 4, 'pages/AnimPage')]
 
   onPageShow() {
     this.showBackTip()

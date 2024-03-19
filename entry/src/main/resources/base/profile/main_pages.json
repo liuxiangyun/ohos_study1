@@ -4,6 +4,7 @@
     "pages/ImagePage",
     "pages/ProductPage",
     "pages/TaskListPage",
-    "pages/ProductDetailPage"
+    "pages/ProductDetailPage",
+    "pages/AnimPage"
   ]
 }
