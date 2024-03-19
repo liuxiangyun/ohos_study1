@@ -1,3 +1,5 @@
+import http from '@ohos.net.http'
+
 @Entry
 @Component
 struct AnimPage {
@@ -12,7 +14,7 @@ struct AnimPage {
   @State anim: boolean = false
   @State isEnable: boolean = true
 
-  ges(){
+  ges() {
     // animateTo()
   }
 
@@ -64,9 +66,23 @@ struct AnimPage {
           this.widthImage = 20
           this.heightImage = 20
         }
+
+        this.httpRequest()
       }).enabled(this.isEnable)
     }
     .height('100%')
     .width('100%')
+  }
+
+  httpRequest() {
+    let request = http.createHttp()
+    request.request('http://www.baidu.com').then(data => {
+      if (data.responseCode == http.ResponseCode.OK) {
+        console.info(data.result.toString())
+      }
+    }).catch(err => {
+      console.error(err.message)
+    })
+
   }
 }
