@@ -6,7 +6,7 @@ import { Header } from '../components/ComComponents'
 @Entry
 @Component
 struct ProductPage {
-  @State data: Product[] = [new Product('huawei mate40 pro', 'https://t12.baidu.com/it/u=1869928635,214858621&fm=30&app=106&f=JPEG?w=640&h=640&s=1FA8782362E366BB881CD1430300F0E1', 3000, 2599),
+  @State phoneData: Product[] = [new Product('huawei mate40 pro', 'https://t12.baidu.com/it/u=1869928635,214858621&fm=30&app=106&f=JPEG?w=640&h=640&s=1FA8782362E366BB881CD1430300F0E1', 3000, 2599),
     new Product('huawei mate40 pro', 'https://t12.baidu.com/it/u=1869928635,214858621&fm=30&app=106&f=JPEG?w=640&h=640&s=1FA8782362E366BB881CD1430300F0E1', 4000),
     new Product('huawei mate50 pro', 'https://t12.baidu.com/it/u=1869928635,214858621&fm=30&app=106&f=JPEG?w=640&h=640&s=1FA8782362E366BB881CD1430300F0E1', 5000),
     new Product('huawei mate60 pro', 'https://t12.baidu.com/it/u=1869928635,214858621&fm=30&app=106&f=JPEG?w=640&h=640&s=1FA8782362E366BB881CD1430300F0E1', 6000, 5599),
@@ -18,8 +18,20 @@ struct ProductPage {
     new Product('huawei mate60 pro', 'https://t12.baidu.com/it/u=1869928635,214858621&fm=30&app=106&f=JPEG?w=640&h=640&s=1FA8782362E366BB881CD1430300F0E1', 6000, 5599),
     new Product('huawei mate70 pro', 'https://t12.baidu.com/it/u=1869928635,214858621&fm=30&app=106&f=JPEG?w=640&h=640&s=1FA8782362E366BB881CD1430300F0E1', 7000),
     new Product('huawei mate80 pro', 'https://t12.baidu.com/it/u=1869928635,214858621&fm=30&app=106&f=JPEG?w=640&h=640&s=1FA8782362E366BB881CD1430300F0E1', 8000)]
+  @State computerData: Product[] = [new Product('huawei mate40 pro', 'https://x0.ifengimg.com/res/2022/A95A4C997EB9279706459BECC61C2ABA22CC8C9E_size395_w1440_h1328.jpg', 3000, 2599),
+    new Product('huawei mate40 pro', 'https://x0.ifengimg.com/res/2022/A95A4C997EB9279706459BECC61C2ABA22CC8C9E_size395_w1440_h1328.jpg', 4000),
+    new Product('huawei mate50 pro', 'https://x0.ifengimg.com/res/2022/A95A4C997EB9279706459BECC61C2ABA22CC8C9E_size395_w1440_h1328.jpg', 5000),
+    new Product('huawei mate60 pro', 'https://x0.ifengimg.com/res/2022/A95A4C997EB9279706459BECC61C2ABA22CC8C9E_size395_w1440_h1328.jpg', 6000, 5599),
+    new Product('huawei mate70 pro', 'https://x0.ifengimg.com/res/2022/A95A4C997EB9279706459BECC61C2ABA22CC8C9E_size395_w1440_h1328.jpg', 7000),
+    new Product('huawei mate80 pro', 'https://x0.ifengimg.com/res/2022/A95A4C997EB9279706459BECC61C2ABA22CC8C9E_size395_w1440_h1328.jpg', 8000),
+    new Product('huawei mate40 pro', 'https://x0.ifengimg.com/res/2022/A95A4C997EB9279706459BECC61C2ABA22CC8C9E_size395_w1440_h1328.jpg', 3000, 2599),
+    new Product('huawei mate40 pro', 'https://x0.ifengimg.com/res/2022/A95A4C997EB9279706459BECC61C2ABA22CC8C9E_size395_w1440_h1328.jpg', 4000),
+    new Product('huawei mate50 pro', 'https://x0.ifengimg.com/res/2022/A95A4C997EB9279706459BECC61C2ABA22CC8C9E_size395_w1440_h1328.jpg', 5000),
+    new Product('huawei mate60 pro', 'https://x0.ifengimg.com/res/2022/A95A4C997EB9279706459BECC61C2ABA22CC8C9E_size395_w1440_h1328.jpg', 6000, 5599),
+    new Product('huawei mate70 pro', 'https://x0.ifengimg.com/res/2022/A95A4C997EB9279706459BECC61C2ABA22CC8C9E_size395_w1440_h1328.jpg', 7000),
+    new Product('huawei mate80 pro', 'https://x0.ifengimg.com/res/2022/A95A4C997EB9279706459BECC61C2ABA22CC8C9E_size395_w1440_h1328.jpg', 8000)]
   @State viewGrid: boolean = false
-  private scroller: Scroller = new Scroller()
+  @State tabCurIndex: number = 0
 
   switchView() {
     this.viewGrid = !this.viewGrid
@@ -33,52 +45,86 @@ struct ProductPage {
         Header({ rightImg: $r('app.media.ic_grid'), rightEvent: () => this.switchView() })
       }
 
-      Row() {
-        if (this.viewGrid) {
-          Grid(this.scroller) {
-            ForEach(this.data, (item: Product) => {
-              GridItem() {
-                this.ItemGridProduct(item)
-              }.onClick(() => {
-                router.pushUrl({ url: 'pages/ProductDetailPage', params: {
-                  productName: item.name,
-                  productPic: item.pic
-                } })
-              })
-            })
-          }.columnsTemplate('1fr 1fr')
-          .columnsGap(10)
-          .rowsGap(20)
-        } else {
-          List({ space: 10, scroller: this.scroller }) {
-            ForEach(this.data, (item: Product) => {
-              ListItem() {
-                this.ItemListProduct(item)
-              }.onClick(() => {
-                router.pushUrl({ url: 'pages/ProductDetailPage', params: {
-                  productName: item.name,
-                  productPic: item.pic
-                } })
-              })
-            })
-          }
-          .margin({ top: 15 })
-          .layoutWeight(1)
-        }
+      Tabs({ barPosition: BarPosition.Start, index: this.tabCurIndex, controller: new TabsController() }) {
+        TabContent() {
+          TabProduct({ data: $phoneData, viewGrid: this.viewGrid })
+        }.tabBar(this.tab('手机', 0))
 
-        ScrollBar({ scroller: this.scroller }) {
-          Text()
-            .width(10)
-            .height(80)
-            .borderRadius(10)
-            .backgroundColor('#C0C0C0')
-        }
-      }.width('100%').layoutWeight(1)
-
+        TabContent() {
+          TabProduct({ data: $computerData, viewGrid: this.viewGrid })
+        }.tabBar(this.tab('电脑', 1))
+      }
+      .height('100%')
+      .layoutWeight(1)
+      .barHeight('50')
+      .barWidth('100%')
+      .vertical(false)
+      .barMode(BarMode.Fixed)
+      .onChange((index: number) => {
+        this.tabCurIndex = index
+      })
     }
-    .alignItems(HorizontalAlign.Start)
     .fillScreen()
+  }
 
+  @Builder
+  tab(text: ResourceStr, tabIndex: number) {
+    Text(text)
+      .fontColor(this.tabCurIndex == tabIndex ? Color.Red : Color.Gray)
+      .fontSize(this.tabCurIndex == tabIndex ? 25 : 20)
+      .fontWeight(this.tabCurIndex == tabIndex ? FontWeight.Bold : FontWeight.Normal)
+  }
+}
+
+@Component
+struct TabProduct {
+  @Link data: Product[]
+  @Prop viewGrid: boolean
+  private scroller = new Scroller()
+
+  build() {
+    Row() {
+      if (this.viewGrid) {
+        Grid(this.scroller) {
+          ForEach(this.data, (item: Product) => {
+            GridItem() {
+              this.ItemGridProduct(item)
+            }.onClick(() => {
+              router.pushUrl({ url: 'pages/ProductDetailPage', params: {
+                productName: item.name,
+                productPic: item.pic
+              } })
+            })
+          })
+        }.columnsTemplate('1fr 1fr')
+        .columnsGap(10)
+        .rowsGap(20)
+        .layoutWeight(1)
+      } else {
+        List({ space: 10, scroller: this.scroller }) {
+          ForEach(this.data, (item: Product) => {
+            ListItem() {
+              this.ItemListProduct(item)
+            }.onClick(() => {
+              router.pushUrl({ url: 'pages/ProductDetailPage', params: {
+                productName: item.name,
+                productPic: item.pic
+              } })
+            })
+          })
+        }
+        .margin({ top: 15 })
+        .layoutWeight(1)
+      }
+
+      ScrollBar({ scroller: this.scroller }) {
+        Text()
+          .width(10)
+          .height(80)
+          .borderRadius(10)
+          .backgroundColor('#C0C0C0')
+      }
+    }.width('100%')
   }
 
   @Builder
@@ -124,7 +170,6 @@ struct ProductPage {
     .padding(8)
   }
 }
-
 
 class Product {
   name: string

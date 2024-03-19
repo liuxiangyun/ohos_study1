@@ -91,6 +91,7 @@ struct LazyTaskList {
           })
         })
       }.width('100%')
+      .cachedCount(5)
       .layoutWeight(1)
     }
 
