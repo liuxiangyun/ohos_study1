@@ -21,6 +21,16 @@ struct ComponentsPage {
               promptAction.showToast({ message: 'router:跳转 pages/FlexPage 失败' })
             })
           })
+
+        Text('Stack')
+          .textStyle(Color.Pink)
+          .onClick(() => {
+            router.pushUrl({ url: 'pages/StackPage' }).then(() => {
+              promptAction.showToast({ message: 'router:跳转 pages/StackPage' })
+            }).catch(() => {
+              promptAction.showToast({ message: 'router:跳转 pages/StackPage 失败' })
+            })
+          })
       }.width('100%')
       .layoutWeight(1)
 

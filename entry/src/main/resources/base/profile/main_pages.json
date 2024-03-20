@@ -7,6 +7,8 @@
     "pages/ProductDetailPage",
     "pages/ComponentsPage",
     "pages/FlexPage",
-    "pages/AnimPage"
+    "pages/AnimPage",
+    "pages/StackPage",
+    "pages/RelativePage"
   ]
 }
