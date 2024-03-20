@@ -5,6 +5,11 @@
     "pages/ProductPage",
     "pages/TaskListPage",
     "pages/ProductDetailPage",
-    "pages/AnimPage"
+    "pages/ComponentsPage",
+    "pages/FlexPage",
+    "pages/AnimPage",
+    "pages/StackPage",
+    "pages/RelativePage",
+    "pages/GridRowColPage"
   ]
 }

@@ -1,7 +1,19 @@
 {
   "app": {
     "signingConfigs": [
-
+      {
+        "name": "default",
+        "type": "HarmonyOS",
+        "material": {
+          "certpath": "/Users/liuxiangyun/.ohos/config/auto_debug_ohos_study1_com.lxy.study_2850086000372117205.cer",
+          "storePassword": "0000001B238B410A5B7BEFF88361FAA42DC73C670FB24076A88568EDD5A5255D4BD750CA73ED0D8A1F7108",
+          "keyAlias": "debugKey",
+          "keyPassword": "0000001B962D689BD55B034078CAAB493BFCD28C7E1791D4F6C404B26C7BD5D05B878070FCF09FB98826F3",
+          "profile": "/Users/liuxiangyun/.ohos/config/auto_debug_ohos_study1_com.lxy.study_2850086000372117205.p7b",
+          "signAlg": "SHA256withECDSA",
+          "storeFile": "/Users/liuxiangyun/.ohos/config/auto_debug_ohos_study1_com.lxy.study_2850086000372117205.p12"
+        }
+      }
     ],
     "compileSdkVersion": 9,
     "compatibleSdkVersion": 9,
