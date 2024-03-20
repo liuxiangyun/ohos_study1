@@ -9,6 +9,7 @@
     "pages/FlexPage",
     "pages/AnimPage",
     "pages/StackPage",
-    "pages/RelativePage"
+    "pages/RelativePage",
+    "pages/GridRowColPage"
   ]
 }

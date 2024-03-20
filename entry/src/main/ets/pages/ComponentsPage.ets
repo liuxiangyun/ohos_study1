@@ -31,6 +31,26 @@ struct ComponentsPage {
               promptAction.showToast({ message: 'router:跳转 pages/StackPage 失败' })
             })
           })
+
+        Text('RelativeContainer')
+          .textStyle(Color.Orange)
+          .onClick(() => {
+            router.pushUrl({ url: 'pages/RelativePage' }).then(() => {
+              promptAction.showToast({ message: 'router:跳转 pages/RelativePage' })
+            }).catch(() => {
+              promptAction.showToast({ message: 'router:跳转 pages/RelativePage 失败' })
+            })
+          })
+
+        Text('GridRow/GridCol')
+          .textStyle(Color.Yellow)
+          .onClick(() => {
+            router.pushUrl({ url: 'pages/GridRowColPage' }).then(() => {
+              promptAction.showToast({ message: 'router:跳转 pages/GridRowCol' })
+            }).catch(() => {
+              promptAction.showToast({ message: 'router:跳转 pages/GridRowCol 失败' })
+            })
+          })
       }.width('100%')
       .layoutWeight(1)
 
