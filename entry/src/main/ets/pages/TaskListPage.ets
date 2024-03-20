@@ -14,10 +14,10 @@ struct TaskListPage {
       TaskProcess({ taskInfo: $taskInfo })
 
       //任务列表
-      // TaskList()
+      TaskList()
 
       //懒加载 任务列表
-      LazyTaskList()
+      // LazyTaskList()
 
     }.fillScreen()
   }
@@ -123,7 +123,7 @@ struct LazyTaskList {
 @Component
 struct TaskList {
   @Consume taskInfo: TaskInfo
-  @State tasks: Array<Task> = []
+  @State @Watch('refreshTaskProcess') tasks: Array<Task> = []
 
   build() {
     Column({ space: 20 }) {
@@ -132,7 +132,6 @@ struct TaskList {
         .width('50%')
         .onClick(() => {
           this.tasks.push(new Task())
-          this.refreshTaskProcess()
         })
 
       List({ space: 10, scroller: new Scroller() }) {
@@ -171,7 +170,6 @@ struct TaskList {
     .margin(10)
     .onClick(() => {
       this.tasks.splice(index, 1)
-      this.refreshTaskProcess()
     })
   }
 }

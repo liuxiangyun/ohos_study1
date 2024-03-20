@@ -6,6 +6,7 @@
     "pages/TaskListPage",
     "pages/ProductDetailPage",
     "pages/ComponentsPage",
-    "pages/FlexPage"
+    "pages/FlexPage",
+    "pages/AnimPage"
   ]
 }
