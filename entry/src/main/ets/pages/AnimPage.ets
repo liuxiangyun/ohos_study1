@@ -119,6 +119,7 @@ struct AnimPage {
         if (this.showSmilingFace) {
           Text('☺').fontColor(Color.Pink).fontSize(30).fontWeight(FontWeight.Bold)
             .transition({
+              type: TransitionType.All,
               opacity: 0,
               translate: { x: -50, y: -50 },
               scale: { x: 2, y: 2, centerX: '50%', centerY: '50%' },
