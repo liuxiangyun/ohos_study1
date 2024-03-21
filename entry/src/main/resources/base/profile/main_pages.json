@@ -10,6 +10,8 @@
     "pages/AnimPage",
     "pages/StackPage",
     "pages/RelativePage",
-    "pages/GridRowColPage"
+    "pages/GridRowColPage",
+    "pages/AppDataPage",
+    "pages/NotificationPage"
   ]
 }

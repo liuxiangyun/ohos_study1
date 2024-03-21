@@ -11,7 +11,9 @@ struct Index {
     new ExamplePage('图片查看', 2, 'pages/ImagePage'),
     new ExamplePage('商品列表', 3, 'pages/ProductPage'),
     new ExamplePage('任务列表', 4, 'pages/TaskListPage'),
-    new ExamplePage('动画介绍', 5, 'pages/AnimPage')]
+    new ExamplePage('动画介绍', 5, 'pages/AnimPage'),
+    new ExamplePage('应用通知', 6, 'pages/NotificationPage'),
+    new ExamplePage('应用数据', 7, 'pages/AppDataPage')]
 
   onPageShow() {
     this.showBackTip()

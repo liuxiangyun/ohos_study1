@@ -1,10 +1,17 @@
 import UIAbility from '@ohos.app.ability.UIAbility';
 import hilog from '@ohos.hilog';
 import window from '@ohos.window';
+import { createFontPreferences } from '../utils/PreferencesUtil'
 
 export default class EntryAbility extends UIAbility {
   onCreate(want, launchParam) {
     hilog.info(0x0000, 'testTag', '%{public}s', 'Ability onCreate');
+
+    //创建首选项
+    globalThis.abilityWant = want
+    createFontPreferences(this.context)
+
+    //
   }
 
   onDestroy() {

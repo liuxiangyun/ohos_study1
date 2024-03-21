@@ -1,5 +1,6 @@
 import http from '@ohos.net.http'
 
+import { Header } from '../components/ComComponents'
 @Entry
 @Component
 struct AnimPage {
@@ -52,6 +53,7 @@ struct AnimPage {
 
   build() {
     Column({ space: 10 }) {
+      Header()
       Stack() {
         Image($r('app.media.ic_delete'))
           .fillColor(this.color)
