@@ -6,9 +6,8 @@ struct AppDataPage {
 
   build() {
     Row() {
-      Header()
-
       Column() {
+        Header()
         Text(this.message)
           .fontSize(50)
           .fontWeight(FontWeight.Bold)

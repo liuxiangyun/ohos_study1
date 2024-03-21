@@ -9,7 +9,7 @@ struct ComponentsPage {
 
   build() {
     Column() {
-      Header({ title: '常用组件' })
+      Header()
 
       Flex() {
         Text('Flex')

@@ -10,7 +10,7 @@ struct NotificationPage {
   @State message: string = 'Hello World'
 
   build() {
-    Row() {
+    Column() {
       Header()
 
       Column({ space: 5 }) {
@@ -34,6 +34,7 @@ struct NotificationPage {
           additionalText: 'additionalText'
         } },
       id: 111,
+      groupName: 'testNotification',
       slotType: notificationManager.SlotType.CONTENT_INFORMATION,
     }).then(result => {
       promptAction.showToast({ message: '文本类型通知发布成功' })
@@ -53,6 +54,7 @@ struct NotificationPage {
           expandedTitle: 'expandedTitle'
         } },
       id: 222,
+      groupName: 'testNotification',
       slotType: notificationManager.SlotType.SOCIAL_COMMUNICATION
     }).then(result => {
       promptAction.showToast({ message: '文本类型通知发布成功' })
@@ -68,9 +70,11 @@ struct NotificationPage {
     let imageArray = await resourceManager.getMediaContent($r('app.media.ic_delete').id);
     let imageResource = image.createImageSource(imageArray.buffer);
     let pixelMap = await imageResource.createPixelMap({ desiredSize: { width: 100, height: 100 } });
-     // 需要获取图片PixelMap信息
+    // 需要获取图片PixelMap信息
     let notificationRequest: notificationManager.NotificationRequest = {
-      id: 1,
+      id: 333,
+      groupName: 'testNotification',
+      slotType: notificationManager.SlotType.SERVICE_INFORMATION,
       content: {
         contentType: notificationManager.ContentType.NOTIFICATION_CONTENT_PICTURE,
         picture: {
