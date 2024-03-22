@@ -1,6 +1,6 @@
 import router from '@ohos.router'
 
-@Component
+@Component @Preview
 export struct Header {
   private title: ResourceStr
   private leftImg: ResourceStr = $r('app.media.ic_back')
@@ -15,7 +15,7 @@ export struct Header {
     } else if (this.params?.pageName) {
       return this.params.pageName
     } else {
-      return $r('app.string.EntryAbility_label')
+      return ''
     }
   }
 

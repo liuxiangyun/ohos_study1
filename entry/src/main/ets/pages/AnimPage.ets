@@ -1,6 +1,6 @@
 import http from '@ohos.net.http'
 
-import { Header } from '../components/ComComponents'
+import { Header } from 'baseLib'
 @Entry
 @Component
 struct AnimPage {

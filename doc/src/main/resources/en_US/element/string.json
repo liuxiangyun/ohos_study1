@@ -1,0 +1,24 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "module description"
+    },
+    {
+      "name": "DocAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "DocAbility_label",
+      "value": "DocList"
+    },
+    {
+      "name": "DocEditAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "DocEditAbility_label",
+      "value": "DocEdit"
+    }
+  ]
+}

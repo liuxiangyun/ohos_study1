@@ -1,0 +1,59 @@
+{
+  "module": {
+    "name": "doc",
+    "type": "feature",
+    "description": "$string:module_desc",
+    "mainElement": "DocAbility",
+    "deviceTypes": [
+      "phone",
+      "tablet"
+    ],
+    "deliveryWithInstall": true,
+    "installationFree": false,
+    "pages": "$profile:main_pages",
+    "srcEntry": "./ets/abilityStage/DocAbilityStage.ts",
+    "abilities": [
+      {
+        "name": "DocAbility",
+        "srcEntry": "./ets/docability/DocAbility.ts",
+        "description": "$string:DocAbility_desc",
+        "icon": "$media:icon",
+        "label": "$string:DocAbility_label",
+        "launchType": "singleton",
+        "startWindowIcon": "$media:icon",
+        "startWindowBackground": "$color:start_window_background",
+        "exported": true,
+        "skills": [
+          {
+            "entities": [
+              "entity.doc.home"
+            ],
+            "actions": [
+              "action.doc.home"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "DocEditAbility",
+        "srcEntry": "./ets/docability/DocEditAbility.ts",
+        "description": "$string:DocEditAbility_desc",
+        "icon": "$media:icon",
+        "label": "$string:DocEditAbility_label",
+        "startWindowIcon": "$media:icon",
+        "launchType": "specified",
+        "startWindowBackground": "$color:start_window_background",
+        "skills": [
+          {
+            "entities": [
+              "entity.doc.edit"
+            ],
+            "actions": [
+              "action.doc.edit"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

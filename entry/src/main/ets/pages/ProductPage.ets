@@ -1,6 +1,6 @@
 import resourceManager from '@ohos.resourceManager'
 import router from '@ohos.router'
-import { Header } from '../components/ComComponents'
+import { Header } from 'baseLib'
 
 
 @Entry

@@ -2,7 +2,7 @@ import notificationManager from '@ohos.notificationManager';
 import notification from '@ohos.notification';
 import promptAction from '@ohos.promptAction';
 import image from '@ohos.multimedia.image';
-import { Header } from '../components/ComComponents';
+import { Header } from 'baseLib';
 
 @Entry
 @Component

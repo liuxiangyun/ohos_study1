@@ -5,13 +5,13 @@
         "name": "default",
         "type": "HarmonyOS",
         "material": {
-          "certpath": "/Users/liuxiangyun/.ohos/config/auto_debug_ohos_study1_com.lxy.study_2850086000372117205.cer",
-          "storePassword": "0000001B238B410A5B7BEFF88361FAA42DC73C670FB24076A88568EDD5A5255D4BD750CA73ED0D8A1F7108",
+          "certpath": "C:\\Users\\13593\\.ohos\\config\\auto_debug_ohos_study1_com.lxy.study_2850086000372117205.cer",
+          "storePassword": "0000001B74CF0C558243531F7827DD9B55375720CF8F7AD94D636ED6C307119070619BFDDE8385F7FEFC28",
           "keyAlias": "debugKey",
-          "keyPassword": "0000001B962D689BD55B034078CAAB493BFCD28C7E1791D4F6C404B26C7BD5D05B878070FCF09FB98826F3",
-          "profile": "/Users/liuxiangyun/.ohos/config/auto_debug_ohos_study1_com.lxy.study_2850086000372117205.p7b",
+          "keyPassword": "0000001B35584A2E90413CEFE3CFEEF47916DCE95192D98C658F29FAD625642D15BCA41ECA702BECD71EC3",
+          "profile": "C:\\Users\\13593\\.ohos\\config\\auto_debug_ohos_study1_com.lxy.study_2850086000372117205.p7b",
           "signAlg": "SHA256withECDSA",
-          "storeFile": "/Users/liuxiangyun/.ohos/config/auto_debug_ohos_study1_com.lxy.study_2850086000372117205.p12"
+          "storeFile": "C:\\Users\\13593\\.ohos\\config\\auto_debug_ohos_study1_com.lxy.study_2850086000372117205.p12"
         }
       }
     ],
@@ -28,6 +28,30 @@
     {
       "name": "entry",
       "srcPath": "./entry",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "baseLibrary",
+      "srcPath": "./baseLibrary",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "doc",
+      "srcPath": "./doc",
       "targets": [
         {
           "name": "default",

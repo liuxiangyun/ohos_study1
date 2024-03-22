@@ -1,6 +1,8 @@
 import router from '@ohos.router'
 import promptAction from '@ohos.promptAction'
-import { Header } from '../components/ComComponents'
+import { Header } from 'baseLib'
+import common from '@ohos.app.ability.common'
+import hilog from '@ohos.hilog'
 
 @Entry
 @Component
@@ -13,7 +15,8 @@ struct Index {
     new ExamplePage('任务列表', 4, 'pages/TaskListPage'),
     new ExamplePage('动画介绍', 5, 'pages/AnimPage'),
     new ExamplePage('应用通知', 6, 'pages/NotificationPage'),
-    new ExamplePage('应用数据', 7, 'pages/AppDataPage')]
+    new ExamplePage('应用数据', 7, 'pages/AppDataPage'),
+    new ExamplePage('OHOffice', 8)]
 
   onPageShow() {
     this.showBackTip()
@@ -53,7 +56,7 @@ struct Index {
 
 
       List({ space: 20 }) {
-        ForEach(this.examples, (example) => {
+        ForEach(this.examples, (example: ExamplePage) => {
           ListItem() {
             Row() {
               Text(`${example.id}`)
@@ -71,12 +74,18 @@ struct Index {
             .padding(20)
             .width('100%')
             .onClick(() => {
-              router.pushUrl({
-                url: example.route,
-                params: { pageName: `${example.id}.${example.name}` }
-              }, router.RouterMode.Standard, (err) => {
-                console.log(`route error ,${err.name} errorCode:${err.code} errorMessage:${err.message}}`)
-              })
+              if (example.route) {
+                //路由跳转
+                router.pushUrl({
+                  url: example.route,
+                  params: { pageName: `${example.id}.${example.name}` }
+                }, router.RouterMode.Standard, (err) => {
+                  console.log(`route error ,${err.name} errorCode:${err.code} errorMessage:${err.message}}`)
+                })
+              } else {
+                //Ability跳转
+                this.openDocModule()
+              }
             })
           }
         })
@@ -84,14 +93,28 @@ struct Index {
       .padding(10)
     }
   }
+
+  async openDocModule() {
+    try {
+      let context = (getContext(this) as common.UIAbilityContext)
+      await context.startAbility({
+        bundleName: 'com.lxy.study',
+        moduleName: 'doc',
+        abilityName: 'DocAbility',
+        // action:'action.doc.home',
+      })
+    } catch (err) {
+      hilog.error(0x110, 'study', '%{public}s', err.code + '')
+    }
+  }
 }
 
 class ExamplePage {
   name: string
   id: number
-  route: string
+  route?: string
 
-  constructor(name: string, id: number, route: string) {
+  constructor(name: string, id: number, route?: string) {
     this.name = name
     this.id = id
     this.route = route
